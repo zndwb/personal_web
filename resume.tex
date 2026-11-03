@@ -1,0 +1,164 @@
+\documentclass[10pt, letterpaper]{article}
+
+% =========================================================
+% Page and Format Settings
+% =========================================================
+\usepackage{geometry}
+\geometry{left=1.4cm, right=1.4cm, top=0.8cm, bottom=0.8cm}
+
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage[hidelinks]{hyperref}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\renewcommand{\baselinestretch}{0.9}
+
+% =========================================================
+% Heading macros
+% =========================================================
+% Line 1: Organization / Project (bold) ...... Location
+% Line 2: Role / Context (italic) ............ Dates
+\newcommand{\entry}[4]{%
+    \noindent
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X r@{}}
+        \textbf{#1} & #2 \\
+        \textit{#3} & \textit{#4}
+    \end{tabularx}\par\vspace{-1pt}%
+}
+
+% Institution line for grouped projects
+\newcommand{\inst}[2]{%
+    \noindent
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X r@{}}
+        \textbf{#1} & #2
+    \end{tabularx}\par\vspace{-1pt}%
+}
+% Project under an institution: Title (bold italic) + note ......... Dates
+\newcommand{\proj}[3]{%
+    \noindent
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X r@{}}
+        \hspace{0.6em}\textbf{\textit{#1}}\ \textit{#2} & \textit{#3}
+    \end{tabularx}\par\vspace{-1pt}%
+}
+
+\titleformat{\section}{\large\bfseries\scshape}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{5pt}{3pt}
+
+\setlist[itemize]{noitemsep, topsep=1pt, parsep=0pt, partopsep=0pt,
+    leftmargin=1.3em, after=\vspace{3pt}}
+
+% =========================================================
+\begin{document}
+
+% ---------------- Header ----------------
+% Public web version: phone number omitted.
+\begin{center}
+    {\LARGE \textbf{Haoxin Guo}} \\[3pt]
+    Urbana, IL \ $|$ \
+    \href{mailto:s611guo@gmail.com}{s611guo@gmail.com} \ $|$ \
+    \href{https://www.linkedin.com/in/haoxin-guo-4a8431351}{linkedin.com/in/haoxin-guo-4a8431351} \ $|$ \
+    \href{https://github.com/zndwb}{github.com/zndwb} \\[2pt]
+    \textbf{Seeking Summer 2027 Internship \& Fall 2027 Co-op: Machine Learning Engineer}
+\end{center}
+
+% ---------------- Education ----------------
+\section{Education}
+
+\entry{University of Illinois Urbana-Champaign}{Urbana, IL}
+      {Master of Computer Science}{Aug 2026 -- Expected May 2028}
+\begin{itemize}
+    \item Coursework: Advanced Topics in NLP (CS 546), Applied Machine Learning (CS 441), Web Programming (CS 409)
+\end{itemize}
+
+\entry{China Agricultural University}{Beijing, China}
+      {B.E. in Computer Science and Technology; GPA: 3.67/4.00}{Sep 2022 -- Jun 2026}
+\vspace{3pt}
+
+% ---------------- Experience ----------------
+\section{Internship Experience}
+
+\entry{Illinois Institute of Technology}{Remote}
+      {Research Intern (Advisor: Prof. Ren Wang)}{Jul 2025 -- Present}
+\begin{itemize}
+    \item \textbf{MoE unlearning (first author, under review at \textit{IEEE TPAMI}):} Showed that single-expert unlearning
+          in \textbf{Mixture-of-Experts} LLMs is superficial (knowledge rebounds after brief fine-tuning)
+          and proposed \textbf{PLEU}, a layer-wise expert erasure method. On DeepSeek-V2-Lite and
+          Qwen1.5-MoE, it had \textbf{lower knowledge recovery} than single-expert baselines in every setting,
+          preserving MMLU utility with \textbf{67--85\% less} runtime than mode-connectivity unlearning.
+    \item \textbf{Agent unlearning:} Core contributor to a project on unlearning for \textbf{self-evolving LLM agents},
+          removing knowledge stored in agent memory and experience, not only weights; designed the experimental setup
+          and ran experiments.
+\end{itemize}
+
+\entry{DP Technology}{Beijing, China}
+      {Machine Learning Engineer Intern}{Oct 2025 -- Jan 2026}
+\begin{itemize}
+    \item Pre-trained a \textbf{diffusion-based foundation model} from scratch on nanopore (POD5) current signals and
+          re-engineered the PyTorch feature-extraction pipeline, reaching 93\% accuracy on core downstream benchmarks.
+    \item Applied \textbf{graph representation learning} to RNA--RNA interaction prediction (97\% accuracy on in-house data).
+    \item Containerized backend computation with \textbf{Docker} on the Bohrium platform and independently shipped a protein
+          normal-mode-analysis web app with automated structure generation and visualization.
+\end{itemize}
+
+\entry{Datang Software Technology}{Beijing, China}
+      {Software Engineer Intern}{Aug 2024 -- Nov 2024}
+\begin{itemize}
+    \item Developed Django backend services integrating an LLM API (Zhipu GLM) to automate text-generation workflows.
+    \item Built data cleaning and ETL jobs with SQL and Spark, and tuned the platform database for query performance.
+\end{itemize}
+
+% ---------------- Projects ----------------
+\section{Project Experience}
+
+\inst{University of Illinois Urbana-Champaign}{Urbana, IL}
+\proj{CulminationNLI: Event-Completion Reasoning in Multilingual LLMs}{(CS 546)}{Fall 2026 -- Present}
+\begin{itemize}[leftmargin=2em]
+    \item Co-developing an \textbf{English--Mandarin NLI benchmark} ($\sim$780 pairs) testing if LLMs tell event
+          occurrence from completion, with labels validated by native speakers.
+    \item Evaluating Qwen, Gemma, and Ministral under zero-shot, definition-aware, few-shot, and CoT prompting, with
+          minimal-pair accuracy and over-/under-inference error analysis; paper planned for submission.
+\end{itemize}
+
+\inst{China Agricultural University}{Beijing, China}
+\proj{Lightweight Tomato Disease Segmentation}{(first author)}{Jul 2023 -- Jan 2025}
+\begin{itemize}[leftmargin=2em]
+    \item Proposed a \textbf{MaxMin-Diffusion attention} mechanism with temporal segmentation, reaching 92\% accuracy and
+          0.91 mIoU (+8 pts over CBAM, +19 over self-attention); deployed on-device on a smartphone.
+\end{itemize}
+\proj{Deep RL Framework for Automatic Hyperparameter Search}{(co-first author)}{Sep 2023 -- May 2025}
+\begin{itemize}[leftmargin=2em]
+    \item Led design and implementation of \textbf{DWIDRL}, framing hyperparameter search as an MDP with progressive
+          search-space attenuation; tuning 5 trajectory-classification models across 4 harvester/tractor scenarios, it beat
+          grid search, Bayesian optimization, PSO, and Q-learning by up to \textbf{+21\% F1} and \textbf{+15\% accuracy}.
+\end{itemize}
+
+% ---------------- Publications ----------------
+\section{Publications}
+\begin{itemize}[leftmargin=1.3em]
+    \item \textbf{H. Guo}, Y. Shi, R. Wang. ``Beyond Superficial Unlearning: Progressive Layer-wise Expert Erasure in
+          MoE Models.'' \textit{IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI)} (IF 20.4), under review.
+    \item \textbf{H. Guo}, et al. ``Efficient Tomato Disease Detection Using MaxMin-Diffusion Mechanism and Lightweight
+          Techniques.'' \textit{Plants} (IF 4.7), 14(3):354, 2025. \textit{(First author)}
+    \item W. Zhai$^*$, \textbf{H. Guo}$^*$, J. Pan, C. Wu. ``An Automatic Parameter Search Framework for Agricultural
+          Machinery Trajectory Operation Mode Identification by Deeply Weakly Informed Deep Reinforcement Learning.''
+          \textit{Computers and Electronics in Agriculture} (IF 10.3), 253:112172, 2026. \textit{($^*$Equal contribution)}
+\end{itemize}
+
+% ---------------- Skills ----------------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=1.3em]
+    \item \textbf{Languages:} Python, C/C++, SQL, MATLAB, R, Verilog, Bash
+    \item \textbf{ML \& LLMs:} PyTorch, Hugging Face, LoRA/PEFT, SFT, RLHF/DPO, MoE, Diffusion Models, Graph Learning, RL
+    \item \textbf{Systems \& Tools:} Docker, Linux, Git, Django, Spark, LangChain, RAG, LLM Agents
+\end{itemize}
+
+% ---------------- Awards ----------------
+\section{Awards}
+\begin{itemize}[leftmargin=1.3em]
+    \item Grand Prize, Capital ``Challenge Cup''; Grand Prize, ``BeiDou Star'' National Finals; Honorable Mention, MCM
+\end{itemize}
+
+\end{document}
