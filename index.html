@@ -129,19 +129,28 @@
     }
     .seeking p { margin: 0; }
 
-    /* Focus cards */
-    .focus { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    .card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px;
+    /* Focus line */
+    .focus-line { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 6px 0 0; }
+    .focus-label { font-size: 14px; color: var(--faint); margin-right: 4px; }
+    .chip { background: var(--chip); border-radius: 999px; padding: 2px 12px; font-size: 14px; font-weight: 500; }
+
+    /* Internship logos */
+    .orgs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .org {
+      display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      font-size: 14px; font-weight: 500; line-height: 1.3;
     }
-    .card svg { color: #ff5f05; }
-    .card h3 { font-size: 16px; margin: 10px 0 6px; }
-    .card p { font-size: 14.5px; color: var(--muted); margin: 0; }
+    .mark {
+      width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+      display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 14px;
+    }
+    .org img { width: 44px; height: 44px; object-fit: contain; flex-shrink: 0; }
 
     footer { color: var(--faint); font-size: 13px; margin-top: 8px; }
 
     @media (max-width: 900px) {
-      .focus { grid-template-columns: 1fr; }
+      .orgs { grid-template-columns: 1fr; }
       .page { grid-template-columns: 1fr; gap: 32px; padding: 24px 16px 48px; }
       aside { position: static; }
     }
@@ -201,14 +210,30 @@
       <section>
         <h2>About</h2>
         <p>
-          I am a Master of Computer Science student at the University of Illinois Urbana-Champaign,
-          and I received my B.E. in Computer Science and Technology from China Agricultural University.
+          I am a Master of Computer Science student at the University of Illinois Urbana-Champaign.
+          I received my B.E. in Computer Science and Technology from China Agricultural University, where I was
+          advised by Prof. Weixin Zhai and worked at the intersection of agriculture and artificial intelligence.
+          My undergraduate research included a lightweight attention model for tomato disease segmentation that runs
+          on a smartphone, and a deep reinforcement learning framework for automatic hyperparameter search on
+          agricultural machinery trajectory data. Both led to journal publications.
         </p>
         <p>
-          I work on making large language models safer and more controllable. As a research intern with
-          Prof. Ren Wang at Illinois Institute of Technology, I study how to remove knowledge from LLMs so that
-          it stays removed, in Mixture-of-Experts models and in LLM agents. Before that, I worked on diffusion
-          models, graph learning, and reinforcement learning in research projects and industry internships.
+          Since 2025 I have been a research intern with Prof. Ren Wang at Illinois Institute of Technology,
+          working on machine unlearning for large language models. I study why knowledge removed from
+          Mixture-of-Experts models tends to come back, and proposed a layer-wise expert erasure method to make
+          it stay removed (first-author paper under review at IEEE TPAMI). I also work on unlearning for
+          self-evolving LLM agents, where knowledge lives in memory and experience rather than only in weights.
+        </p>
+        <p>
+          In industry, I was a Machine Learning Engineer intern at DP Technology (深势科技) in Beijing, where I
+          pre-trained a diffusion-based foundation model from scratch on nanopore sequencing signals, applied graph
+          representation learning to RNA–RNA interaction prediction, and shipped a containerized protein
+          analysis web app on the Bohrium platform. Before that, I was a Software Engineer intern at Datang Software
+          Technology, building Django backend services on top of an LLM API and SQL/Spark data pipelines.
+        </p>
+        <p class="focus-line">
+          <span class="focus-label">Current focus</span>
+          <span class="chip">LLM Safety</span><span class="chip">Machine Unlearning</span><span class="chip">LLM Agents</span>
         </p>
         <div class="seeking">
           <p><strong>Seeking:</strong> Machine Learning Engineer internship (Summer 2027) and co-op (Fall 2027).</p>
@@ -216,23 +241,11 @@
       </section>
 
       <section>
-        <h2>Current Focus</h2>
-        <div class="focus">
-          <div class="card">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <h3>LLM Safety</h3>
-            <p>Making language models behave reliably and resist recovering harmful or private knowledge.</p>
-          </div>
-          <div class="card">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20H9L3 14l9-9 8 8-6 6"/><path d="m8 9 7 7"/></svg>
-            <h3>Machine Unlearning</h3>
-            <p>Erasing specific knowledge from trained models, especially Mixture-of-Experts LLMs, without hurting general ability.</p>
-          </div>
-          <div class="card">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 7V3"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/></svg>
-            <h3>LLM Agents</h3>
-            <p>Understanding what self-evolving agents keep in memory and experience, and how to control it.</p>
-          </div>
+        <h2>Where I've Interned</h2>
+        <div class="orgs">
+          <div class="org"><span class="mark" style="background:#cc0000">IIT</span><span>Illinois Institute of Technology</span></div>
+          <div class="org"><span class="mark" style="background:#2b5cff">DP</span><span>DP Technology</span></div>
+          <div class="org"><span class="mark" style="background:#0a6cb5">DT</span><span>Datang Software Technology</span></div>
         </div>
       </section>
 
