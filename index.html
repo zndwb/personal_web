@@ -4,42 +4,48 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Haoxin Guo</title>
-  <meta name="description" content="Haoxin Guo: grad student at UIUC, curious about what large language models remember and how to make them forget.">
+  <meta name="description" content="Haoxin Guo: Master of Computer Science student at UIUC working on machine unlearning for large language models.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #faf9f6;
+      --bg: #f7f7f5;
       --surface: #ffffff;
-      --text: #1f1e1c;
-      --muted: #66635d;
-      --faint: #96928b;
-      --border: #e7e4de;
-      --accent: #b4532a;
-      --accent-soft: #f8ebe3;
+      --text: #1d1f22;
+      --muted: #5e636b;
+      --faint: #8d939b;
+      --border: #e4e4e0;
+      --accent: #e84a27;          /* Illinois orange, darkened for text contrast */
+      --accent-text: #c2410c;
+      --navy: #13294b;            /* Illinois blue */
+      --chip: #f0f0ed;
     }
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
-        --bg: #141413;
-        --surface: #1c1b1a;
-        --text: #ebe9e4;
-        --muted: #a9a59d;
-        --faint: #7d7973;
-        --border: #2c2a28;
-        --accent: #e8875a;
-        --accent-soft: #2b1e17;
+        --bg: #111317;
+        --surface: #191c21;
+        --text: #e9eaec;
+        --muted: #a5abb3;
+        --faint: #7a8089;
+        --border: #2a2e35;
+        --accent: #ff7a3d;
+        --accent-text: #ff8a52;
+        --navy: #9db4e0;
+        --chip: #22262d;
       }
     }
     :root[data-theme="dark"] {
-      --bg: #141413;
-      --surface: #1c1b1a;
-      --text: #ebe9e4;
-      --muted: #a9a59d;
-      --faint: #7d7973;
-      --border: #2c2a28;
-      --accent: #e8875a;
-      --accent-soft: #2b1e17;
+      --bg: #111317;
+      --surface: #191c21;
+      --text: #e9eaec;
+      --muted: #a5abb3;
+      --faint: #7a8089;
+      --border: #2a2e35;
+      --accent: #ff7a3d;
+      --accent-text: #ff8a52;
+      --navy: #9db4e0;
+      --chip: #22262d;
     }
 
     * { box-sizing: border-box; }
@@ -47,152 +53,279 @@
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      font: 17px/1.7 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font: 16px/1.65 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
     }
-    a { color: var(--accent); text-decoration: none; }
+    a { color: var(--accent-text); text-decoration: none; }
     a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-    .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+    /* Illinois accent strip */
+    .strip { height: 5px; background: linear-gradient(90deg, var(--navy) 0 70%, #ff5f05 70% 100%); }
 
-    .top { display: flex; justify-content: flex-end; padding: 20px 0 0; }
+    .page {
+      max-width: 1180px; margin: 0 auto; padding: 48px 32px 64px;
+      display: grid; grid-template-columns: 300px 1fr; gap: 56px; align-items: start;
+    }
+
+    /* Sidebar */
+    aside {
+      position: sticky; top: 32px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+      padding: 28px 24px; text-align: center;
+    }
+    .avatar {
+      width: 160px; height: 160px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--surface); box-shadow: 0 0 0 1px var(--border);
+      display: block; margin: 0 auto 18px;
+    }
+    aside h1 { font-size: 26px; margin: 0; letter-spacing: -0.01em; }
+    aside .zh { color: var(--faint); font-size: 15px; margin-top: 2px; }
+    aside .title { color: var(--muted); font-size: 15px; margin: 10px 0 0; }
+
+    .affil {
+      display: flex; align-items: center; gap: 12px; text-align: left;
+      margin: 20px 0; padding: 14px; border-radius: 12px; background: var(--chip);
+    }
+    .affil svg { flex-shrink: 0; }
+    .affil b { display: block; font-size: 14px; line-height: 1.3; color: var(--text); }
+    .affil span { font-size: 13px; color: var(--muted); }
+
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--navy); color: #fff;
+      padding: 10px 18px; border-radius: 10px; font-size: 15px; font-weight: 600;
+    }
+    :root[data-theme="dark"] .btn { color: #111317; }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn { color: #111317; } }
+    .btn:hover { text-decoration: none; opacity: 0.9; }
+
+    .contacts { list-style: none; padding: 0; margin: 18px 0 0; text-align: left; font-size: 14px; }
+    .contacts li { display: flex; align-items: center; gap: 10px; padding: 6px 2px; }
+    .contacts svg { color: var(--faint); flex-shrink: 0; }
+    .contacts a { color: var(--text); overflow-wrap: anywhere; }
+    .contacts a:hover { color: var(--accent-text); }
+
     #theme {
-      background: none; border: 1px solid var(--border); color: var(--muted);
-      border-radius: 999px; width: 34px; height: 34px; cursor: pointer;
-      display: grid; place-items: center;
+      margin-top: 16px; background: none; border: 1px solid var(--border); color: var(--muted);
+      border-radius: 8px; padding: 6px 12px; font: inherit; font-size: 13px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
     }
     #theme:hover { color: var(--text); }
 
-    /* Intro */
-    .intro { display: flex; gap: 36px; align-items: center; padding: 40px 0 44px; }
-    .avatar {
-      width: 168px; height: 168px; border-radius: 50%; flex-shrink: 0;
-      object-fit: cover;
-      border: 1px solid var(--border); background: var(--surface);
-    }
-    .intro h1 {
-      font-family: Newsreader, Georgia, serif; font-weight: 500;
-      font-size: 44px; line-height: 1.1; margin: 0 0 6px; letter-spacing: -0.01em;
-    }
-    .intro .zh { color: var(--faint); font-size: 17px; margin-bottom: 14px; }
-    .intro .where { color: var(--muted); font-size: 16px; margin: 0 0 18px; }
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--text); color: var(--bg);
-      padding: 8px 18px; border-radius: 999px; font-size: 15px; font-weight: 500;
-    }
-    .btn:hover { text-decoration: none; opacity: 0.88; }
-    .icon-link {
-      width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border);
-      display: grid; place-items: center; color: var(--muted); background: var(--surface);
-    }
-    .icon-link:hover { color: var(--accent); border-color: var(--accent); }
-
-    /* Body text */
-    section { padding: 8px 0 36px; }
+    /* Main */
+    main { min-width: 0; }
+    section { margin-bottom: 44px; }
     h2 {
-      font-family: Newsreader, Georgia, serif; font-weight: 500; font-size: 26px;
-      margin: 0 0 14px;
+      font-size: 22px; margin: 0 0 18px; letter-spacing: -0.01em;
+      display: flex; align-items: center; gap: 10px;
     }
-    p { margin: 0 0 16px; }
-    .about p:first-child::first-letter { }
+    h2::before { content: ""; width: 4px; height: 20px; border-radius: 2px; background: #ff5f05; }
+    p { margin: 0 0 14px; }
 
-    .now { list-style: none; padding: 0; margin: 0; }
-    .now li {
-      padding: 14px 0; border-top: 1px solid var(--border);
-      display: grid; grid-template-columns: 110px 1fr; gap: 16px;
+    .seeking {
+      display: flex; gap: 12px; align-items: flex-start;
+      border: 1px solid var(--border); border-left: 4px solid #ff5f05;
+      background: var(--surface); border-radius: 10px; padding: 14px 18px; margin-top: 18px;
     }
-    .now li:last-child { border-bottom: 1px solid var(--border); }
-    .now .label { color: var(--faint); font-size: 14px; padding-top: 2px; }
+    .seeking p { margin: 0; }
 
-    .note {
-      background: var(--accent-soft); border-radius: 14px; padding: 18px 22px; margin: 4px 0 0;
+    /* Timeline */
+    .timeline { position: relative; }
+    .tl-item {
+      display: grid; grid-template-columns: 52px 1fr; gap: 16px;
+      padding: 18px 0; border-top: 1px solid var(--border);
     }
-    .note p:last-child { margin-bottom: 0; }
+    .tl-item:first-child { border-top: 0; padding-top: 0; }
+    .logo {
+      width: 52px; height: 52px; border-radius: 12px; background: var(--surface);
+      border: 1px solid var(--border); display: grid; place-items: center;
+      font-weight: 700; font-size: 14px; color: var(--muted); letter-spacing: 0.02em;
+    }
+    .tl-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .tl-head h3 { margin: 0; font-size: 16px; }
+    .when { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 13px; color: var(--faint); white-space: nowrap; }
+    .role { color: var(--muted); font-size: 14px; margin: 1px 0 6px; }
+    .tl-item ul { margin: 0; padding-left: 18px; }
+    .tl-item li { margin-bottom: 3px; }
+    .tl-item li::marker { color: var(--faint); }
 
-    footer { padding: 24px 0 56px; color: var(--faint); font-size: 14px; }
+    /* Publications */
+    .pubs { display: grid; gap: 12px; }
+    .pub {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px;
+    }
+    .pub .t { font-weight: 600; }
+    .pub .a, .pub .v { font-size: 14px; color: var(--muted); }
+    .pub .me { color: var(--text); font-weight: 600; }
+    .tag {
+      display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 6px;
+      background: #fff1e8; color: #c2410c; margin-left: 6px;
+    }
 
-    @media (max-width: 600px) {
-      .intro { flex-direction: column; align-items: flex-start; gap: 22px; padding-top: 16px; }
-      .avatar { width: 128px; height: 128px; }
-      .intro h1 { font-size: 36px; }
-      .now li { grid-template-columns: 1fr; gap: 2px; }
+    footer { color: var(--faint); font-size: 13px; margin-top: 8px; }
+
+    @media (max-width: 900px) {
+      .page { grid-template-columns: 1fr; gap: 32px; padding: 24px 16px 48px; }
+      aside { position: static; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <button id="theme" aria-label="Toggle dark mode" title="Toggle dark mode">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-      </button>
-    </div>
+  <div class="strip"></div>
 
-    <header class="intro">
-      <img class="avatar" src="img/profile.jpg" alt="Photo of Haoxin Guo" width="168" height="168">
-      <div>
-        <h1>Haoxin Guo</h1>
-        <div class="zh">郭浩鑫</div>
-        <p class="where">Grad student at UIUC · Urbana, Illinois</p>
-        <div class="actions">
-          <a class="btn" href="resume.pdf" target="_blank" rel="noopener">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-            View my résumé
-          </a>
-          <a class="icon-link" href="mailto:s611guo@gmail.com" aria-label="Email" title="Email">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-          </a>
-          <a class="icon-link" href="https://github.com/zndwb" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
-          </a>
-          <a class="icon-link" href="https://www.linkedin.com/in/haoxin-guo-4a8431351" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
-          </a>
+  <div class="page">
+    <aside>
+      <img class="avatar" src="img/profile.jpg" alt="Photo of Haoxin Guo" width="160" height="160">
+      <h1>Haoxin Guo</h1>
+      <div class="zh">郭浩鑫</div>
+      <p class="title">M.C.S. Student · ML &amp; LLM Research</p>
+
+      <div class="affil">
+        <svg width="34" height="46" viewBox="0 0 64 88" aria-hidden="true">
+          <path d="M2 2h60v20H46v44h16v20H2V66h16V22H2z" fill="#ff5f05" stroke="#13294b" stroke-width="4" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <b>University of Illinois Urbana-Champaign</b>
+          <span>Siebel School of Computing and Data Science</span>
         </div>
       </div>
-    </header>
 
-    <section class="about">
-      <h2>Hi, I'm Haoxin.</h2>
-      <p>
-        I'm a Master of Computer Science student at the University of Illinois Urbana-Champaign.
-        Most of my time goes into one question: <em>what do large language models actually remember,
-        and can we make them truly forget?</em>
-      </p>
-      <p>
-        Removing knowledge from a model turns out to be surprisingly shallow. It often looks gone, then
-        comes back after a little fine-tuning. Working with Prof. Ren Wang at Illinois Tech,
-        I've been studying this in Mixture-of-Experts models and, more recently, in LLM agents that keep
-        their own memories. I care about this because models that can't forget are hard to trust.
-      </p>
-      <p>
-        I didn't start out in language models. I did my undergrad at China Agricultural University in Beijing,
-        where my first research was spotting tomato leaf disease on a phone and teaching an RL agent to tune
-        models for tractor and harvester data. Along the way I also spent time in industry, training a
-        diffusion model on DNA sequencing signals and building backend services around LLMs. I like work where
-        a clean idea has to survive contact with messy, real data.
-      </p>
-    </section>
+      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
+        View Full Résumé
+      </a>
 
-    <section>
-      <h2>Right now</h2>
-      <ul class="now">
-        <li><span class="label">Research</span><span>Making unlearning in MoE models stick: erasing knowledge layer by layer instead of from a single expert.</span></li>
-        <li><span class="label">Class project</span><span>Building an English–Mandarin benchmark that asks whether LLMs can tell “he was writing a letter” from “he wrote a letter.”</span></li>
-        <li><span class="label">Learning</span><span>Web programming, NLP, and applied ML at UIUC, which is also why this site exists.</span></li>
+      <ul class="contacts">
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <span>Urbana, IL</span>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <a href="mailto:s611guo@gmail.com">s611guo@gmail.com</a>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+          <a href="https://github.com/zndwb" target="_blank" rel="noopener">github.com/zndwb</a>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          <a href="https://www.linkedin.com/in/haoxin-guo-4a8431351" target="_blank" rel="noopener">LinkedIn</a>
+        </li>
       </ul>
-    </section>
 
-    <section>
-      <div class="note">
-        <p><strong>I'm looking for a Machine Learning Engineer internship for Summer 2027 and a co-op for Fall 2027.</strong>
-          If you're working on LLMs, training, or trustworthy ML, I'd love to hear from you at
-          <a href="mailto:s611guo@gmail.com">s611guo@gmail.com</a>.</p>
-      </div>
-    </section>
+      <button id="theme" aria-label="Toggle dark mode">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        Theme
+      </button>
+    </aside>
 
-    <footer>© <span id="year">2026</span> Haoxin Guo</footer>
+    <main>
+      <section>
+        <h2>About</h2>
+        <p>
+          I am a Master of Computer Science student at the University of Illinois Urbana-Champaign (2026–2028).
+          I received my B.E. in Computer Science and Technology from China Agricultural University in 2026.
+        </p>
+        <p>
+          My research is on machine unlearning for large language models, including Mixture-of-Experts models
+          and self-evolving LLM agents, advised by Prof. Ren Wang at Illinois Institute of Technology.
+          I have also worked on diffusion models, graph learning, and reinforcement learning, both in research
+          and in industry internships.
+        </p>
+        <div class="seeking">
+          <p><strong>Seeking:</strong> Machine Learning Engineer internship (Summer 2027) and co-op (Fall 2027).</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="logo" aria-hidden="true">
+              <svg width="22" height="30" viewBox="0 0 64 88"><path d="M2 2h60v20H46v44h16v20H2V66h16V22H2z" fill="#ff5f05" stroke="#13294b" stroke-width="4" stroke-linejoin="round"/></svg>
+            </div>
+            <div>
+              <div class="tl-head"><h3>University of Illinois Urbana-Champaign</h3><span class="when">2026 – now</span></div>
+              <div class="role">Master of Computer Science</div>
+              <ul>
+                <li>Building CulminationNLI, an English–Mandarin NLI benchmark (~780 pairs) on event-completion reasoning, and evaluating Qwen, Gemma, and Ministral on it (CS 546).</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="logo" aria-hidden="true">IIT</div>
+            <div>
+              <div class="tl-head"><h3>Illinois Institute of Technology</h3><span class="when">2025 – now</span></div>
+              <div class="role">Research Intern · Prof. Ren Wang</div>
+              <ul>
+                <li>Proposed PLEU, a layer-wise expert erasure method for unlearning in MoE LLMs (DeepSeek-V2-Lite, Qwen1.5-MoE). First-author paper under review at IEEE TPAMI.</li>
+                <li>Working on unlearning for self-evolving LLM agents, covering knowledge stored in memory and experience.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="logo" aria-hidden="true">DP</div>
+            <div>
+              <div class="tl-head"><h3>DP Technology</h3><span class="when">2025 – 2026</span></div>
+              <div class="role">Machine Learning Engineer Intern · Beijing</div>
+              <ul>
+                <li>Pre-trained a diffusion-based foundation model on nanopore sequencing signals.</li>
+                <li>Applied graph representation learning to RNA–RNA interaction prediction, and shipped a protein analysis web app.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="logo" aria-hidden="true">DT</div>
+            <div>
+              <div class="tl-head"><h3>Datang Software Technology</h3><span class="when">2024</span></div>
+              <div class="role">Software Engineer Intern · Beijing</div>
+              <ul>
+                <li>Built Django backend services on top of an LLM API, plus SQL and Spark data pipelines.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="tl-item">
+            <div class="logo" aria-hidden="true">CAU</div>
+            <div>
+              <div class="tl-head"><h3>China Agricultural University</h3><span class="when">2022 – 2026</span></div>
+              <div class="role">B.E. in Computer Science and Technology</div>
+              <ul>
+                <li>Designed a lightweight attention mechanism for tomato disease segmentation, deployed on a smartphone.</li>
+                <li>Co-led DWIDRL, a deep RL framework for automatic hyperparameter search on agricultural machinery data.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Publications</h2>
+        <div class="pubs">
+          <div class="pub">
+            <div class="t">Beyond Superficial Unlearning: Progressive Layer-wise Expert Erasure in MoE Models</div>
+            <div class="a"><span class="me">H. Guo</span>, Y. Shi, R. Wang</div>
+            <div class="v"><em>IEEE TPAMI</em><span class="tag">Under review</span></div>
+          </div>
+          <div class="pub">
+            <div class="t">An Automatic Parameter Search Framework for Agricultural Machinery Trajectory Operation Mode Identification by Deeply Weakly Informed Deep Reinforcement Learning</div>
+            <div class="a">W. Zhai*, <span class="me">H. Guo</span>*, J. Pan, C. Wu (*equal contribution)</div>
+            <div class="v"><em>Computers and Electronics in Agriculture</em>, 2026</div>
+          </div>
+          <div class="pub">
+            <div class="t">Efficient Tomato Disease Detection Using MaxMin-Diffusion Mechanism and Lightweight Techniques</div>
+            <div class="a"><span class="me">H. Guo</span>, et al.</div>
+            <div class="v"><em>Plants</em>, 2025</div>
+          </div>
+        </div>
+      </section>
+
+      <footer>© <span id="year">2026</span> Haoxin Guo</footer>
+    </main>
   </div>
 
   <script>
