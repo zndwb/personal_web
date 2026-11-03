@@ -129,42 +129,19 @@
     }
     .seeking p { margin: 0; }
 
-    /* Timeline */
-    .timeline { position: relative; }
-    .tl-item {
-      display: grid; grid-template-columns: 52px 1fr; gap: 16px;
-      padding: 18px 0; border-top: 1px solid var(--border);
+    /* Focus cards */
+    .focus { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px;
     }
-    .tl-item:first-child { border-top: 0; padding-top: 0; }
-    .logo {
-      width: 52px; height: 52px; border-radius: 12px; background: var(--surface);
-      border: 1px solid var(--border); display: grid; place-items: center;
-      font-weight: 700; font-size: 14px; color: var(--muted); letter-spacing: 0.02em;
-    }
-    .tl-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-    .tl-head h3 { margin: 0; font-size: 16px; }
-    .when { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 13px; color: var(--faint); white-space: nowrap; }
-    .role { color: var(--muted); font-size: 14px; margin: 1px 0 6px; }
-    .tl-item ul { margin: 0; padding-left: 18px; }
-    .tl-item li { margin-bottom: 3px; }
-    .tl-item li::marker { color: var(--faint); }
-
-    /* Publications */
-    .pubs { display: grid; gap: 12px; }
-    .pub {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px;
-    }
-    .pub .t { font-weight: 600; }
-    .pub .a, .pub .v { font-size: 14px; color: var(--muted); }
-    .pub .me { color: var(--text); font-weight: 600; }
-    .tag {
-      display: inline-block; font-size: 12px; font-weight: 600; padding: 1px 8px; border-radius: 6px;
-      background: #fff1e8; color: #c2410c; margin-left: 6px;
-    }
+    .card svg { color: #ff5f05; }
+    .card h3 { font-size: 16px; margin: 10px 0 6px; }
+    .card p { font-size: 14.5px; color: var(--muted); margin: 0; }
 
     footer { color: var(--faint); font-size: 13px; margin-top: 8px; }
 
     @media (max-width: 900px) {
+      .focus { grid-template-columns: 1fr; }
       .page { grid-template-columns: 1fr; gap: 32px; padding: 24px 16px 48px; }
       aside { position: static; }
     }
@@ -190,7 +167,7 @@
         </div>
       </div>
 
-      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">
+      <a class="btn" href="https://drive.google.com/drive/folders/1hhto875E0UZeaTx35yZENmq7yQywWjlF" target="_blank" rel="noopener">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
         View Full Résumé
       </a>
@@ -224,14 +201,14 @@
       <section>
         <h2>About</h2>
         <p>
-          I am a Master of Computer Science student at the University of Illinois Urbana-Champaign (2026–2028).
-          I received my B.E. in Computer Science and Technology from China Agricultural University in 2026.
+          I am a Master of Computer Science student at the University of Illinois Urbana-Champaign,
+          and I received my B.E. in Computer Science and Technology from China Agricultural University.
         </p>
         <p>
-          My research is on machine unlearning for large language models, including Mixture-of-Experts models
-          and self-evolving LLM agents, advised by Prof. Ren Wang at Illinois Institute of Technology.
-          I have also worked on diffusion models, graph learning, and reinforcement learning, both in research
-          and in industry internships.
+          I work on making large language models safer and more controllable. As a research intern with
+          Prof. Ren Wang at Illinois Institute of Technology, I study how to remove knowledge from LLMs so that
+          it stays removed, in Mixture-of-Experts models and in LLM agents. Before that, I worked on diffusion
+          models, graph learning, and reinforcement learning in research projects and industry internships.
         </p>
         <div class="seeking">
           <p><strong>Seeking:</strong> Machine Learning Engineer internship (Summer 2027) and co-op (Fall 2027).</p>
@@ -239,87 +216,22 @@
       </section>
 
       <section>
-        <h2>Experience</h2>
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="logo" aria-hidden="true">
-              <svg width="22" height="30" viewBox="0 0 64 88"><path d="M2 2h60v20H46v44h16v20H2V66h16V22H2z" fill="#ff5f05" stroke="#13294b" stroke-width="4" stroke-linejoin="round"/></svg>
-            </div>
-            <div>
-              <div class="tl-head"><h3>University of Illinois Urbana-Champaign</h3><span class="when">2026 – now</span></div>
-              <div class="role">Master of Computer Science</div>
-              <ul>
-                <li>Building CulminationNLI, an English–Mandarin NLI benchmark (~780 pairs) on event-completion reasoning, and evaluating Qwen, Gemma, and Ministral on it (CS 546).</li>
-              </ul>
-            </div>
+        <h2>Current Focus</h2>
+        <div class="focus">
+          <div class="card">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <h3>LLM Safety</h3>
+            <p>Making language models behave reliably and resist recovering harmful or private knowledge.</p>
           </div>
-
-          <div class="tl-item">
-            <div class="logo" aria-hidden="true">IIT</div>
-            <div>
-              <div class="tl-head"><h3>Illinois Institute of Technology</h3><span class="when">2025 – now</span></div>
-              <div class="role">Research Intern · Prof. Ren Wang</div>
-              <ul>
-                <li>Proposed PLEU, a layer-wise expert erasure method for unlearning in MoE LLMs (DeepSeek-V2-Lite, Qwen1.5-MoE). First-author paper under review at IEEE TPAMI.</li>
-                <li>Working on unlearning for self-evolving LLM agents, covering knowledge stored in memory and experience.</li>
-              </ul>
-            </div>
+          <div class="card">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 20H9L3 14l9-9 8 8-6 6"/><path d="m8 9 7 7"/></svg>
+            <h3>Machine Unlearning</h3>
+            <p>Erasing specific knowledge from trained models, especially Mixture-of-Experts LLMs, without hurting general ability.</p>
           </div>
-
-          <div class="tl-item">
-            <div class="logo" aria-hidden="true">DP</div>
-            <div>
-              <div class="tl-head"><h3>DP Technology</h3><span class="when">2025 – 2026</span></div>
-              <div class="role">Machine Learning Engineer Intern · Beijing</div>
-              <ul>
-                <li>Pre-trained a diffusion-based foundation model on nanopore sequencing signals.</li>
-                <li>Applied graph representation learning to RNA–RNA interaction prediction, and shipped a protein analysis web app.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="logo" aria-hidden="true">DT</div>
-            <div>
-              <div class="tl-head"><h3>Datang Software Technology</h3><span class="when">2024</span></div>
-              <div class="role">Software Engineer Intern · Beijing</div>
-              <ul>
-                <li>Built Django backend services on top of an LLM API, plus SQL and Spark data pipelines.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="logo" aria-hidden="true">CAU</div>
-            <div>
-              <div class="tl-head"><h3>China Agricultural University</h3><span class="when">2022 – 2026</span></div>
-              <div class="role">B.E. in Computer Science and Technology</div>
-              <ul>
-                <li>Designed a lightweight attention mechanism for tomato disease segmentation, deployed on a smartphone.</li>
-                <li>Co-led DWIDRL, a deep RL framework for automatic hyperparameter search on agricultural machinery data.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <h2>Publications</h2>
-        <div class="pubs">
-          <div class="pub">
-            <div class="t">Beyond Superficial Unlearning: Progressive Layer-wise Expert Erasure in MoE Models</div>
-            <div class="a"><span class="me">H. Guo</span>, Y. Shi, R. Wang</div>
-            <div class="v"><em>IEEE TPAMI</em><span class="tag">Under review</span></div>
-          </div>
-          <div class="pub">
-            <div class="t">An Automatic Parameter Search Framework for Agricultural Machinery Trajectory Operation Mode Identification by Deeply Weakly Informed Deep Reinforcement Learning</div>
-            <div class="a">W. Zhai*, <span class="me">H. Guo</span>*, J. Pan, C. Wu (*equal contribution)</div>
-            <div class="v"><em>Computers and Electronics in Agriculture</em>, 2026</div>
-          </div>
-          <div class="pub">
-            <div class="t">Efficient Tomato Disease Detection Using MaxMin-Diffusion Mechanism and Lightweight Techniques</div>
-            <div class="a"><span class="me">H. Guo</span>, et al.</div>
-            <div class="v"><em>Plants</em>, 2025</div>
+          <div class="card">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 7V3"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/></svg>
+            <h3>LLM Agents</h3>
+            <p>Understanding what self-evolving agents keep in memory and experience, and how to control it.</p>
           </div>
         </div>
       </section>
